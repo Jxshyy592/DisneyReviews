@@ -1,13 +1,25 @@
 from flask import Flask, make_response, jsonify, request
 from pymongo import MongoClient
 from bson import ObjectId
-
+import random
 app = Flask(__name__)
 
 
-client = MongoClient('localhost', 27017)
+client = MongoClient("mongodb://127.0.0.1:27017")
 db = client.first
 reviews = db.disneyReviews
+
+
+
+
+
+
+
+
+@app.route("/api/v1.0/reviews", methods=["GET"])
+def show_all_reviews():
+    return make_response(jsonify(reviews), 200)
+
 
 @app.route("/api/v1.0/reviews", methods=['GET'])
 def get_all_reviews():
