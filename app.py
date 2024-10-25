@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 
 client = MongoClient("mongodb://127.0.0.1:27017")
-db = client.first
+db = client.mainData
 reviews = db.disneyReviews
 
 
@@ -17,8 +17,11 @@ reviews = db.disneyReviews
 
 @app.route("/reviews", methods=['GET'])
 def show_one_review():
-    data_to_return = [ review for review in reviews if review['id'] == id ]
-    return make_response( jsonify(data_to_return), 200 )
+    review_id = request.args.get("id", type=int)
+    data_to_return = [ review for review in reviews if review['id'] == review_id ]
+
+    if not data_to_return:
+        return make_response( jsonify({"error": "Review not found"}), 200 )
 
 
 
