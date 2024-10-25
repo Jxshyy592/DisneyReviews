@@ -11,11 +11,14 @@ reviews = db.disneyReviews
 
 
 
-@app.route("/", methods=['GET'])
-def index():
-    return make_response( "<h1>Lil dude running about<h1>", 200 )
+#@app.route("/", methods=['GET'])
+#def index():
+ #   return make_response( "<h1>Lil dude running about<h1>", 200 )
 
-
+@app.route("/reviews", methods=['GET'])
+def show_one_review():
+    data_to_return = [ review for review in reviews if review['id'] == id ]
+    return make_response( jsonify(data_to_return), 200 )
 
 
 

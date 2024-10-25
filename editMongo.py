@@ -2,7 +2,7 @@ from pymongo import MongoClient
 import random
 
 client = MongoClient("mongodb://127.0.0.1:27017")
-db = client.first
+db = client.mainData
 reviews = db.disneyReviews
 
 for review in reviews.find():
