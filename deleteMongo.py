@@ -9,5 +9,5 @@ reviews = db.disneyReviews
 for review in reviews.find():
     reviews.update_one(
         {"_id": review["_id"] },
-        {"$unset": { "dummy" : "" } }
+        {"$unset": { "ID" : "" } }
     )
